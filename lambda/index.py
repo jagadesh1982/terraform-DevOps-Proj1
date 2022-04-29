@@ -14,8 +14,8 @@ def lambda_handler(event, context):
 
   # Get the cluster name from the fixed format topic arn
   topic = event['Records'][0]['Sns']['TopicArn']
-  subject = event['Records'][0]['Sns']['TopicArn']
-  message = event['Records'][0]['Sns']['TopicArn']
+  subject = event['Records'][0]['Sns']['Subject']
+  message = event['Records'][0]['Sns']['Message']
 
   print("Call from SNS topic: " + topic+", subject: ")
   
