@@ -122,6 +122,14 @@ resource "aws_sns_topic_subscription" "topic_lambda" {
   endpoint  = "${aws_lambda_function.terraform_lambda_func.arn}"
 }
 
+resource "aws_lambda_permission" "with_sns" {
+    statement_id = "AllowExecutionFromSNS"
+    action = "lambda:InvokeFunction"
+    function_name = "${aws_lambda_function.terraform_lambda_func.arn}"
+    principal = "sns.amazonaws.com"
+    source_arn = "${aws_sns_topic.my_first_sns_topic.arn}"
+}
+
 resource "aws_dynamodb_table" "EKS_cluster_monitoring" {
   name        = "${var.table_name}"
   hash_key      = "cluster_name"
